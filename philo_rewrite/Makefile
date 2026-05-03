@@ -1,4 +1,4 @@
-SRCS = srcs/main.c 
+SRCS = srcs/main.c srcs/utils.c srcs/init_table_forks.c srcs/init_philos.c srcs/philos_routine.c srcs/philos_forks.c
 OBJS = $(SRCS:srcs/%.c=objs/%.o)
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g -pthread

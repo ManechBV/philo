@@ -1,12 +1,13 @@
 [
  {
-  "directory": "/home/mabenois/Documents/C/philo/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo_rewrite",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-g",
+   "-pthread",
    "-I",
    "includes",
    "-c",
