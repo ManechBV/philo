@@ -1,0 +1,110 @@
+[
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/main.c",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "srcs/main.c"
+ },
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/utils.c",
+   "-o",
+   "objs/utils.o"
+  ],
+  "file": "srcs/utils.c"
+ },
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/init_table_forks.c",
+   "-o",
+   "objs/init_table_forks.o"
+  ],
+  "file": "srcs/init_table_forks.c"
+ },
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/init_philos.c",
+   "-o",
+   "objs/init_philos.o"
+  ],
+  "file": "srcs/init_philos.c"
+ },
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/philos_routine.c",
+   "-o",
+   "objs/philos_routine.o"
+  ],
+  "file": "srcs/philos_routine.c"
+ },
+ {
+  "directory": "/home/mabenois/Documents/C/philo_repo_perso/philo_rewrite",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-pthread",
+   "-I",
+   "includes",
+   "-c",
+   "srcs/philos_forks.c",
+   "-o",
+   "objs/philos_forks.o"
+  ],
+  "file": "srcs/philos_forks.c"
+ }
+]
