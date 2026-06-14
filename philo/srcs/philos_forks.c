@@ -6,7 +6,7 @@
 /*   By: mabenois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 01:58:35 by mabenois          #+#    #+#             */
-/*   Updated: 2026/06/12 00:49:17 by mabenois         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:27:52 by mabenois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,26 @@ void	philo_take_forks(t_philo *curr)
 	t_fork	*first;
 	t_fork	*second;
 
-	first = curr->fork_r;
-	second = curr->fork_l;
+	first = curr->fork_l;
+	second = curr->fork_r;
+	/*
+	if (curr->id == 3 && curr->is_last == 1)
+	{
+		first = curr->fork_r;
+		second = curr->fork_l;
+	}
+	if (curr->is_last == 1 && curr->id % 2 != 0)
+	{
+			if (curr->fork_r < curr->fork_l)
+			{
+			first = curr->fork_r;
+			second = curr->fork_l;
+			}
+	}
+	*/
+		/*
 	while (1)
 	{
-		/*
 		if (ft_fork_is_taken(first) == 1 || ft_fork_is_taken(second) == 1)
 			continue ;
 			*/
@@ -84,9 +99,9 @@ void	philo_take_forks(t_philo *curr)
 			ft_drop_fork(first);
 			continue;
 		}
-		*/
 		break;
 	}
+		*/
 }
 
 void	philo_release_forks(t_philo *curr)

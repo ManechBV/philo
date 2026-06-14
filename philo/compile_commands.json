@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",
@@ -18,7 +18,7 @@
   "file": "srcs/main.c"
  },
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",
@@ -36,7 +36,7 @@
   "file": "srcs/utils.c"
  },
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",
@@ -54,7 +54,7 @@
   "file": "srcs/init_table_forks.c"
  },
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",
@@ -72,7 +72,7 @@
   "file": "srcs/init_philos.c"
  },
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",
@@ -90,7 +90,7 @@
   "file": "srcs/philos_routine.c"
  },
  {
-  "directory": "/home/mabenois/Documents/C/philo",
+  "directory": "/home/mabenois/Documents/C/philo/philo",
   "arguments": [
    "cc",
    "-Wall",

@@ -6,7 +6,7 @@
 /*   By: mabenois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 01:44:29 by mabenois          #+#    #+#             */
-/*   Updated: 2026/06/12 00:54:05 by mabenois         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:51:19 by mabenois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,17 @@ void	ft_assign_forks(t_table *table, long long i)
 {
 	long long	fork_r_id;
 
-	fork_r_id = i + 1;
-	if (fork_r_id >= table->nb_philos)
-		fork_r_id = 0;
-	if (i % 2 == 0)
+	fork_r_id = i - 1;
+	if (fork_r_id < 0)
+		fork_r_id = table->nb_philos - 1;
+	if (i % 2 != 0 && !(i == 1 && table->nb_philos == 3))
 	{
 		table->philos[i].fork_l = &table->forks[i];
 		table->philos[i].fork_r = &table->forks[fork_r_id];
 		return ;
 	}
-	table->philos[i].fork_l = &table->forks[fork_r_id];
 	table->philos[i].fork_r = &table->forks[i];
+	table->philos[i].fork_l = &table->forks[fork_r_id];
 }
 
 void	ft_set_mutexes_ptr(t_table *table, long long i)

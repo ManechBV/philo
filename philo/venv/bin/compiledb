@@ -1,4 +1,4 @@
-#!/home/mabenois/Documents/C/philo/venv/bin/python3
+#!/home/mabenois/Documents/C/philo/philo/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
