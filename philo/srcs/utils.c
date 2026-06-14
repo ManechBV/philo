@@ -6,7 +6,7 @@
 /*   By: mabenois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 01:36:08 by mabenois          #+#    #+#             */
-/*   Updated: 2026/05/03 01:37:14 by mabenois         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:12:06 by mabenois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,33 @@ long long	ft_atol(char *s)
 	return (ret);
 }
 
+long long	ft_get_time(void)
+{
+	struct timeval	time;
+	long long		curr_time;
+
+	if (gettimeofday(&time, NULL) != 0)
+		return (-1);
+	curr_time = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (curr_time);
+}
+
+void	ft_philo_set_eat_times(t_philo *curr)
+{
+	pthread_mutex_lock(&curr->meal_mutex);
+	curr->time_last_meal = ft_get_time();
+	curr->meals_eaten++;
+	pthread_mutex_unlock(&curr->meal_mutex);
+}
+
+int	ft_philo_should_termiate(t_philo *self)
+{
+	pthread_mutex_lock(self->death_mut);
+	if (*(self->should_die) == 1)
+	{
+		pthread_mutex_unlock(self->death_mut);
+		return (-1);
+	}
+	pthread_mutex_unlock(self->death_mut);
+	return (0);
+}

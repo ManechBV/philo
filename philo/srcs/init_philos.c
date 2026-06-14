@@ -6,86 +6,26 @@
 /*   By: mabenois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 01:44:29 by mabenois          #+#    #+#             */
-/*   Updated: 2026/06/14 18:51:19 by mabenois         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:14:30 by mabenois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <pthread.h>
 
-void	ft_monitor_join_philos(t_table *table)
+static void	ft_init_curr_philo(t_table *table, long long i)
 {
-	long long	i;
-
-	i = 0;
-	while (i < table->nb_philos)
-	{
-		pthread_join(table->philos[i].thread, NULL);
-		i++;
-	}
-}
-
-static void	*monitor_routine(void *data)
-{
-	t_table		*table;
-	t_philo		*curr;
-	long long	i;
-	long long	philos_eat_max;
-
-	table = (t_table*) data;
-	while (1)
-	{
-		i = 0;
-		philos_eat_max = 0;
-		while (i < table->nb_philos)
-		{
-			curr = &table->philos[i];
-			pthread_mutex_lock(&(curr->meal_mutex));
-			if (curr->time_last_meal == -1)
-			{
-				pthread_mutex_unlock(&(curr->meal_mutex));
-				i++;
-				continue;
-			}
-			if (curr->meals_eaten >= table->max_meals && table->max_meals > 0)
-				philos_eat_max++;
-			pthread_mutex_lock(curr->death_mut);
-			if (((ft_get_time() - curr->time_last_meal) > table->time_die))
-			{
-				pthread_mutex_unlock(&(curr->meal_mutex));
-				table->should_die = 1;
-				pthread_mutex_unlock(curr->death_mut);
-				philo_print(curr, "\e[0;91mdied", 1);
-				ft_monitor_join_philos(table);
-				return (NULL);
-			}
-			pthread_mutex_unlock(curr->death_mut);
-			pthread_mutex_unlock(&(curr->meal_mutex));
-			i++;
-		}
-		if (philos_eat_max == i)
-		{
-				pthread_mutex_lock(curr->death_mut);
-				table->should_die = 1;
-				pthread_mutex_unlock(curr->death_mut);
-				ft_monitor_join_philos(table);
-				return (NULL);
-		}
-		usleep(800);
-	}
-	return (NULL);
-}
-
-static int	ft_init_monitor(t_table *table)
-{
-	if (pthread_create(&table->monitor, NULL, monitor_routine, table) != 0)
-	{
-		pthread_mutex_lock(&table->death_mut);
-		table->should_die = 1;
-		pthread_mutex_unlock(&table->death_mut);
-		return (-1);
-	}
-	return (0);
+	table->philos[i].id = i + 1;
+	table->philos[i].time_die = table->time_die;
+	table->philos[i].time_start = &table->time_start;
+	table->philos[i].time_eat = table->time_eat;
+	table->philos[i].time_sleep = table->time_sleep;
+	table->philos[i].time_last_meal = -1;
+	table->philos[i].meals_eaten = 0;
+	table->philos[i].max_meals = table->max_meals;
+	table->philos[i].is_last = 0;
+	if (i == table->nb_philos - 1)
+		table->philos[i].is_last = 1;
 }
 
 int	ft_init_philos(t_table *table)
@@ -99,28 +39,15 @@ int	ft_init_philos(t_table *table)
 	i = 0;
 	while (i < table->nb_philos)
 	{
-		table->philos[i].id = i + 1;
-		table->philos[i].time_die = table->time_die;
-		table->philos[i].time_start = &table->time_start;
-		table->philos[i].time_eat = table->time_eat;
-		table->philos[i].time_sleep = table->time_sleep;
-		table->philos[i].time_last_meal = -1;
-		table->philos[i].meals_eaten = 0;
-		table->philos[i].max_meals = table->max_meals;
-		table->philos[i].is_last = 0;
-		if (i == table->nb_philos - 1)
-			table->philos[i].is_last = 1;
+		ft_init_curr_philo(table, i);
 		if (pthread_mutex_init(&(table->philos[i].meal_mutex), NULL) != 0)
 			return (-1);
 		ft_assign_forks(table, i);
 		ft_set_mutexes_ptr(table, i);
-		/*
-		if (table->nb_philos % 2 != 0 && table->philos[i].is_last == 1)
-			usleep(table->time_eat * 1000);
-			*/
 		if (i % 2 == 0)
 			usleep(1000);
-		if (pthread_create(&table->philos[i].thread, NULL, philo_routine, &table->philos[i]) != 0)
+		if (pthread_create(&table->philos[i].thread, NULL,
+				philo_routine, &table->philos[i]) != 0)
 			return (-1);
 		i++;
 	}
@@ -145,7 +72,7 @@ void	ft_assign_forks(t_table *table, long long i)
 	fork_r_id = i - 1;
 	if (fork_r_id < 0)
 		fork_r_id = table->nb_philos - 1;
-	if (i % 2 != 0 && !(i == 1 && table->nb_philos == 3))
+	if (i % 2 != 0)
 	{
 		table->philos[i].fork_l = &table->forks[i];
 		table->philos[i].fork_r = &table->forks[fork_r_id];

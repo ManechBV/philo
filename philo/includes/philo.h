@@ -6,7 +6,7 @@
 /*   By: mabenois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 01:28:51 by mabenois          #+#    #+#             */
-/*   Updated: 2026/06/12 00:52:46 by mabenois         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:12:21 by mabenois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 # include <sys/select.h>
 # include <sys/time.h>
 
-typedef struct	s_fork
+typedef struct s_fork
 {
 	pthread_mutex_t	mut;
 	pthread_mutex_t	taken_mut;
 	char			taken;
 }	t_fork;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	pthread_t		thread;
 	int				id;
@@ -48,7 +48,7 @@ typedef struct	s_philo
 	long long		max_meals;
 }	t_philo;
 
-typedef struct	s_table
+typedef struct s_table
 {
 	long long		nb_philos;
 	t_philo			*philos;
@@ -67,6 +67,8 @@ typedef struct	s_table
 //	utils.c
 long long		ft_atol(char *s);
 long long		ft_get_time(void);
+void			ft_philo_set_eat_times(t_philo *curr);
+int				ft_philo_should_termiate(t_philo *self);
 
 //	init_table_forks.c
 void			ft_assign_forks(t_table *table, long long i);
@@ -90,5 +92,8 @@ int				philo_sleep(t_philo *curr, long long duration, int mess);
 //	philos_forks.c
 void			philo_take_forks(t_philo *curr);
 void			philo_release_forks(t_philo *curr);
+
+//	monitor.c
+int				ft_init_monitor(t_table *table);
 
 #endif
